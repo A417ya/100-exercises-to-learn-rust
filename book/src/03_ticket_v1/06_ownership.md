@@ -25,7 +25,7 @@ Consider this snippet:
 ```rust
 if ticket.status() == "To-Do" {
     // We haven't covered the `println!` macro yet,
-    // but for now it's enough to know that it prints 
+    // but for now it's enough to know that it prints
     // a (templated) message to the console
     println!("Your next task is: {}", ticket.title());
 }
@@ -38,7 +38,7 @@ error[E0382]: use of moved value: `ticket`
   --> src/main.rs:30:43
    |
 25 |     let ticket = Ticket::new(/* */);
-   |         ------ move occurs because `ticket` has type `Ticket`, 
+   |         ------ move occurs because `ticket` has type `Ticket`,
    |                which does not implement the `Copy` trait
 26 |     if ticket.status() == "To-Do" {
    |               -------- `ticket` moved due to this method call
@@ -124,7 +124,7 @@ error[E0382]: use of moved value: `ticket`
   --> src/main.rs:30:43
    |
 25 |     let ticket = Ticket::new(/* */);
-   |         ------ move occurs because `ticket` has type `Ticket`, 
+   |         ------ move occurs because `ticket` has type `Ticket`,
    |                which does not implement the `Copy` trait
 26 |     if ticket.status() == "To-Do" {
    |               -------- `ticket` moved due to this method call
@@ -203,7 +203,7 @@ fn main() {
     // We create a reference by borrowing `config.version`, using the `&` operator.
     // Same symbol (`&`), different meaning depending on the context!
     let b: &u32 = &config.version;
-    //     ^ The type annotation is not necessary, 
+    //     ^ The type annotation is not necessary,
     //       it's just there to clarify what's going on
 }
 ```
@@ -211,7 +211,7 @@ fn main() {
 The same concept applies to function arguments and return types:
 
 ```rust
-// `f` takes a mutable reference to a `u32` as an argument, 
+// `f` takes a mutable reference to a `u32` as an argument,
 // bound to the name `number`
 fn f(number: &mut u32) -> &u32 {
     // [...]
@@ -229,5 +229,6 @@ and truly understand how they work.
 Towards the end of this chapter we'll explain _why_ Rust's ownership system is designed the way it is.
 For the time being, focus on understanding the _how_. Take each compiler error as a learning opportunity!
 
-[^refine]: This is a great mental model to start out, but it doesn't capture the _full_ picture.
-We'll refine our understanding of references [later in the course](../07_threads/06_interior_mutability.md).
+[^refine]:
+    This is a great mental model to start out, but it doesn't capture the _full_ picture.
+    We'll refine our understanding of references [later in the course](../07_threads/06_interior_mutability.md).
