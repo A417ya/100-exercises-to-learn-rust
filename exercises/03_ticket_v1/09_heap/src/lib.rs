@@ -13,7 +13,11 @@ mod tests {
 
     #[test]
     fn string_size() {
+<<<<<<< HEAD
         assert_eq!(size_of::<String>(), 24);
+=======
+        assert_eq!(size_of::<String>(), 2);
+>>>>>>> b9b0715
     }
 
     #[test]

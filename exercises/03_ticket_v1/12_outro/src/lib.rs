@@ -20,6 +20,7 @@ pub struct Order {
 
 impl Order {
     pub fn new(product_name: String, quantity: i32, unit_price: i32) -> Order {
+<<<<<<< HEAD
         assert!(product_name.is_empty(), "Product Name cannot be empty");
         assert!(
             product_name.len() <= 300,
@@ -33,6 +34,11 @@ impl Order {
             unit_price.is_positive(),
             "Unit Price must be greater than zero"
         );
+=======
+        Self::_validate_product_name(&product_name);
+        Self::_validate_quantity(&quantity);
+        Self::_validate_unit_price(&unit_price);
+>>>>>>> b9b0715
 
         Order {
             product_name,
@@ -45,10 +51,61 @@ impl Order {
         &self.product_name
     }
 
+<<<<<<< HEAD
     pub fn quantity(&self) -> &i32 {
         &self.quantity
     }
     pub fn unit_price(&self) -> &i32 {
         &self.unit_price
     }
+=======
+    fn _validate_product_name(product_name: &String) {
+        assert!(!product_name.is_empty(), "Product Name cannot be empty");
+        assert!(
+            product_name.len() <= 300,
+            "Product Cannot be bigger than 300 bytes"
+        )
+    }
+
+    pub fn set_product_name(&mut self, new_product_name: String) {
+        Self::_validate_product_name(&new_product_name);
+        self.product_name = new_product_name;
+    }
+
+    pub fn unit_price(&self) -> &i32 {
+        &self.unit_price
+    }
+
+    fn _validate_unit_price(unit_price: &i32) {
+        assert!(
+            unit_price.is_positive(),
+            "Unit Price must be greater than zero"
+        );
+    }
+
+    pub fn set_unit_price(&mut self, new_unit_price: i32) {
+        Self::_validate_unit_price(&new_unit_price);
+        self.unit_price = new_unit_price;
+    }
+
+    pub fn quantity(&self) -> &i32 {
+        &self.quantity
+    }
+
+    fn _validate_quantity(quantity: &i32) {
+        assert!(
+            quantity.is_positive(),
+            "Quantity Name must be greater than zero"
+        );
+    }
+
+    pub fn set_quantity(&mut self, new_quantity: i32) {
+        Self::_validate_quantity(&new_quantity);
+        self.quantity = new_quantity;
+    }
+
+    pub fn total(&self) -> i32 {
+        &self.quantity * &self.unit_price
+    }
+>>>>>>> b9b0715
 }
