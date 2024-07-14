@@ -1,4 +1,5 @@
 /// Return `true` if `n` is even, `false` otherwise.
+
 fn is_even(n: u32) -> bool {
     if n % 2 == 0 {
         return true;

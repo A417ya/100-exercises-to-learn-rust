@@ -23,6 +23,7 @@ It ends when one of the following happens:
    } //  <-------------- ...and ends here
    ```
 2. ownership of the variable is transferred to someone else (e.g. a function or another variable)
+
    ```rust
    fn compute(t: String) {
       // Do something [...]
@@ -30,7 +31,7 @@ It ends when one of the following happens:
 
    fn main() {
        let s = "Hello".to_string(); // <-- s's scope starts here...
-                   //                    | 
+                   //                    |
        compute(s); // <------------------- ..and ends here
                    //   because `s` is moved into `compute`
    }
@@ -89,8 +90,8 @@ It's equivalent to this:
 ```rust
 fn compute(t: String) {
     // Do something [...]
-    drop(t); // <-- Assuming `t` wasn't dropped or moved 
-             //     before this point, the compiler will call 
+    drop(t); // <-- Assuming `t` wasn't dropped or moved
+             //     before this point, the compiler will call
              //     `drop` here, when it goes out of scope
 }
 
@@ -102,6 +103,7 @@ fn main() {
 
 Notice the difference: even though `s` is no longer valid after `compute` is called in `main`, there is no `drop(s)`
 in `main`.
+
 When you transfer ownership of a value to a function, you're also **transferring the responsibility of cleaning it up**.
 
 This ensures that the destructor for a value is called **at most[^leak] once**, preventing
@@ -147,7 +149,7 @@ When you call `drop(y)`... nothing happens.\
 If you actually try to compile this code, you'll get a warning:
 
 ```text
-warning: calls to `std::mem::drop` with a reference 
+warning: calls to `std::mem::drop` with a reference
          instead of an owned value does nothing
  --> src/main.rs:4:5
   |
@@ -165,5 +167,6 @@ They would refer to a memory location that's no longer valid: a so-called [**dan
 a close relative of [**use-after-free bugs**](https://owasp.org/www-community/vulnerabilities/Using_freed_memory).
 Rust's ownership system rules out these kinds of bugs by design.
 
-[^leak]: Rust doesn't guarantee that destructors will run. They won't, for example, if
-you explicitly choose to [leak memory](../07_threads/03_leak.md).
+[^leak]:
+    Rust doesn't guarantee that destructors will run. They won't, for example, if
+    you explicitly choose to [leak memory](../07_threads/03_leak.md).

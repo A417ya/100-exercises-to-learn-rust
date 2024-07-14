@@ -54,7 +54,7 @@ If you run this code, memory will be laid out like this:
 
 ```
       +---------+--------+----------+
-Stack | pointer | length | capacity | 
+Stack | pointer | length | capacity |
       |  |      |   0    |    5     |
       +--|------+--------+----------+
          |
@@ -133,10 +133,12 @@ but there is no general-purpose "API" to retrieve runtime heap usage in Rust.\
 You can, however, use a memory profiler tool (e.g. [DHAT](https://valgrind.org/docs/manual/dh-manual.html)
 or [a custom allocator](https://docs.rs/dhat/latest/dhat/)) to inspect the heap usage of your program.
 
-[^empty]: `std` doesn't allocate if you create an **empty** `String` (i.e. `String::new()`).
-Heap memory will be reserved when you push data into it for the first time.
+[^empty]:
+    `std` doesn't allocate if you create an **empty** `String` (i.e. `String::new()`).
+    Heap memory will be reserved when you push data into it for the first time.
 
-[^equivalence]: The size of a pointer depends on the operating system too.
-In certain environments, a pointer is **larger** than a memory address (e.g. [CHERI](https://blog.acolyer.org/2019/05/28/cheri-abi/)).
-Rust makes the simplifying assumption that pointers are the same size as memory addresses,
-which is true for most modern systems you're likely to encounter.
+[^equivalence]:
+    The size of a pointer depends on the operating system too.
+    In certain environments, a pointer is **larger** than a memory address (e.g. [CHERI](https://blog.acolyer.org/2019/05/28/cheri-abi/)).
+    Rust makes the simplifying assumption that pointers are the same size as memory addresses,
+    which is true for most modern systems you're likely to encounter.
