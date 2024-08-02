@@ -9,7 +9,7 @@ pub trait From<T> {
 
 pub trait Deref {
     type Target;
-    
+
     fn deref(&self) -> &Self::Target;
 }
 ```
@@ -22,9 +22,7 @@ What's the difference? Why use one over the other?
 
 ## At most one implementation
 
-Due to how deref coercion works, there can only be one "target" type for a given type. E.g. `String` can
-only deref to `str`.
-It's about avoiding ambiguity: if you could implement `Deref` multiple times for a type,
+Due to how deref coercion works, there can only be one "target" type for a given type. E.g. `String` can only deref to `str`. It's about avoiding ambiguity: if you could implement `Deref` multiple times for a type,
 which `Target` type should the compiler choose when you call a `&self` method?
 
 That's why `Deref` uses an associated type, `Target`.\
@@ -61,7 +59,7 @@ As a closing example, consider the `Add` trait from the standard library:
 ```rust
 pub trait Add<RHS = Self> {
     type Output;
-    
+
     fn add(self, rhs: RHS) -> Self::Output;
 }
 ```
@@ -79,12 +77,12 @@ For example, you'll find these two implementations in the standard library:
 ```rust
 impl Add<u32> for u32 {
     type Output = u32;
-    
+
     fn add(self, rhs: u32) -> u32 {
       //                      ^^^
       // This could be written as `Self::Output` instead.
       // The compiler doesn't care, as long as the type you
-      // specify here matches the type you assigned to `Output` 
+      // specify here matches the type you assigned to `Output`
       // right above.
       // [...]
     }
@@ -92,7 +90,7 @@ impl Add<u32> for u32 {
 
 impl Add<&u32> for u32 {
     type Output = u32;
-    
+
     fn add(self, rhs: &u32) -> u32 {
         // [...]
     }
@@ -141,6 +139,7 @@ To recap:
 - Use a **generic parameter** when you want to allow multiple implementations of the trait for the same type,
   with different input types.
 
-[^flexible]: Flexibility is rarely free: the trait definition is more complex due to `Output`, and implementors have to reason about
-what they want to return. The trade-off is only justified if that flexibility is actually needed. Keep that in mind
-when designing your own traits.
+[^flexible]:
+    Flexibility is rarely free: the trait definition is more complex due to `Output`, and implementors have to reason about
+    what they want to return. The trade-off is only justified if that flexibility is actually needed. Keep that in mind
+    when designing your own traits.

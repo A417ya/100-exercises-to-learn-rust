@@ -20,25 +20,9 @@ pub struct Order {
 
 impl Order {
     pub fn new(product_name: String, quantity: i32, unit_price: i32) -> Order {
-<<<<<<< HEAD
-        assert!(product_name.is_empty(), "Product Name cannot be empty");
-        assert!(
-            product_name.len() <= 300,
-            "Product Name is Bigger than 300 bytes"
-        );
-        assert!(
-            quantity.is_positive(),
-            "Quantity Name must be greater than zero"
-        );
-        assert!(
-            unit_price.is_positive(),
-            "Unit Price must be greater than zero"
-        );
-=======
         Self::_validate_product_name(&product_name);
         Self::_validate_quantity(&quantity);
         Self::_validate_unit_price(&unit_price);
->>>>>>> b9b0715
 
         Order {
             product_name,
@@ -51,20 +35,12 @@ impl Order {
         &self.product_name
     }
 
-<<<<<<< HEAD
-    pub fn quantity(&self) -> &i32 {
-        &self.quantity
-    }
-    pub fn unit_price(&self) -> &i32 {
-        &self.unit_price
-    }
-=======
     fn _validate_product_name(product_name: &String) {
         assert!(!product_name.is_empty(), "Product Name cannot be empty");
         assert!(
             product_name.len() <= 300,
             "Product Cannot be bigger than 300 bytes"
-        )
+        );
     }
 
     pub fn set_product_name(&mut self, new_product_name: String) {
@@ -107,5 +83,4 @@ impl Order {
     pub fn total(&self) -> i32 {
         &self.quantity * &self.unit_price
     }
->>>>>>> b9b0715
 }

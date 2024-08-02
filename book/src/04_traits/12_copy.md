@@ -105,9 +105,10 @@ It follows that `&mut T` never implements `Copy`, no matter what `T` is.
 In most cases, you don't need to manually implement `Copy`.
 You can just derive it, like this:
 
-```rust
+````rust
 #[derive(Copy, Clone)]
 struct MyStruct {
     field: u32,
 }
-```
+j```
+````
