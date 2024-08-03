@@ -18,16 +18,16 @@ enum Status {
 impl Ticket {
     pub fn new(title: String, description: String, status: Status) -> Result<Ticket, String> {
         if title.is_empty() {
-            Err("Title cannot be empty".into());
+            return Err("Title cannot be empty".to_string());
         }
         if title.len() > 50 {
-            Err("Title cannot be longer than 50 bytes".into());
+            return Err("Title cannot be longer than 50 bytes".to_string());
         }
         if description.is_empty() {
-            Err("Description cannot be empty".into());
+            return Err("Description cannot be empty".to_string());
         }
         if description.len() > 500 {
-            Err("Description cannot be longer than 500 bytes".into());
+            return Err("Description cannot be longer than 500 bytes".to_string());
         }
 
         Ok(Ticket {
